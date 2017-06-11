@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>EffekseerForWebGL</title>
+  <body>
+    <canvas id="canvas" width="720" height="380" class="screen" oncontextmenu="event.preventDefault()"></canvas>
+    <br>
+    <div id="buttons">
+      <input type="button" onclick="effekseer.play(effects['sword'], 0, 0, 0);" value="乱れ斬りエフェクト"></input>
+      <input type="button" onclick="effekseer.play(effects['TitleEffect'], 0, 0, 0);" value="ロゴエフェクト"></input>
+      <input type="button" onclick="effekseer.play(effects['distortion'], 0, 0, 0);" value="トランジションエフェクト"></input>
+
+      <input type="button" onclick="effekseer.play(effects['Laser02'], 0, 0, 0);" value="レーザー"></input>
+      <input type="button" onclick="effekseer.play(effects['block'], 0, 0, 0);" value="ブロック"></input>
+	</div>
+    <div id="buttons">
+      <input type="button" onclick="stopAll();" value="停止"></input>
+      <input type="button" onclick="togglePause();" value="ポーズ"></input>
+      <input type="button" onclick="capture();" value="画像キャプチャー"></input>
+    </div>
+    <br>
+    <script type='text/javascript'>
+      var effects = {};
+      var main = function () {
+        var canvas = document.getElementById("canvas");
+
+        var scene = new THREE.Scene();
+        var width  = canvas.width;
+        var height = canvas.height;
+        var fov    = 30;
+        var aspect = width / height;
+        var near   = 1;
+        var far    = 1000;
+        var camera = new THREE.PerspectiveCamera( fov, aspect, near, far );
+        var target = new THREE.Vector3(0, 0, 0);
+        camera.position.set( 20, 20, 20 );
+        camera.lookAt(target);
+        
+        var controls = new THREE.OrbitControls(camera);
+        controls.autoRotate = false;
+
+        var renderer = new THREE.WebGLRenderer({canvas: canvas, preserveDrawingBuffer: true});
+        renderer.setSize( width, height );
+        //document.body.appendChild( renderer.domElement );
+
+		effekseer.init(renderer.context);
+		effects["sword"] = effekseer.loadEffect("Resource/002_sword_effect/sword.efk");
+		effects["Laser02"] = effekseer.loadEffect("Resource_/Laser01.efk");
+		effects["TitleEffect"] = effekseer.loadEffect("Resource/004_logo_effect/TitleEffect.efk");
+		effects["distortion"] = effekseer.loadEffect("Resource/005_distortion_effect/distortion.efk");
+		effects["block"] = effekseer.loadEffect("Resource_/block.efk");
+
+        var grid = new THREE.GridHelper(20, 10, 0xffffff, 0xffffff);
+        //scene.add(grid);
+
+        var directionalLight = new THREE.DirectionalLight( 0xffffff );
+        directionalLight.position.set( 0, 0.7, 0.7 );
+        scene.add( directionalLight );
+
+        var geometry = new THREE.CubeGeometry( 2, 2, 2 );
+        var material = new THREE.MeshPhongMaterial( { color: 0xff0000 } );
+        var mesh = new THREE.Mesh( geometry, material );
+        //scene.add( mesh );
+        
+        ( function renderLoop () {
+          requestAnimationFrame( renderLoop );
+          
+          if (!paused) {
+          	effekseer.update();
+          }          
+          controls.update();
+          
+          renderer.render( scene, camera );
+          effekseer.setProjectionMatrix(camera.projectionMatrix.elements);
+          effekseer.setCameraMatrix(camera.matrixWorldInverse.elements);
+          effekseer.draw();
+        
+        } )();
+      };
+      window.addEventListener( 'DOMContentLoaded', main, false );
+      var paused = false;
+      function stopAll() {
+      	paused = false;
+		effekseer.stopAll();
+      }
+      function togglePause () {
+      	paused = !paused;
+      }
+      function capture () {
+        var canvas = window.document.getElementById("canvas");
+      	var dataUrl = canvas.toDataURL();
+      	
+      	window.open(dataUrl);
+      }
+    </script>
+    <script src="js/three.min.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/effekseer.min.js"></script>
+  </body>
+</html>
