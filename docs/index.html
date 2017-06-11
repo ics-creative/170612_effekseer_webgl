@@ -4,47 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>EffekseerForWebGL</title>
-    <style>
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background-color: #333;
-      color: #FFF;
-    }
-    #app{
-      width: 100%;
-      height: 100%;
-      position: fixed;
-    }
-    #menu{
-      position: absolute;
-      left: 0;
-      top: 0;
-      margin: 10px;
-    }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
   <body>
     <div id="app"><canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas></div>
     
     <div id="menu">
-	<div id="buttons">
-	エフェクト選択：
-      <input type="button" onclick="effekseer.play(effects['sword'], 0, 0, 0);" value="乱れ斬りエフェクト"></input>
-      <input type="button" onclick="effekseer.play(effects['TitleEffect'], 0, 0, 0);" value="ロゴエフェクト"></input>
-      <input type="button" onclick="effekseer.play(effects['Laser02'], 0, 0, 0);" value="レーザーエフェクト"></input>
-      <input type="button" onclick="effekseer.play(effects['block'], 0, 0, 0);" value="ブロックエフェクト"></input>
+    <div class="mb-10" id="buttons">
+	<a href="#" class="btn btn-mod btn-border btn-circle btn-medium" onclick="effekseer.play(effects['sword'], 0, 0, 0);">乱れ斬り</a>
+	<a href="#" class="btn btn-mod btn-border btn-circle btn-medium" onclick="effekseer.play(effects['TitleEffect'], 0, 0, 0);">LevelUp</a>
+	<a href="#" class="btn btn-mod btn-border btn-circle btn-medium" onclick="effekseer.play(effects['Laser02'], 0, 0, 0);">レーザー</a>
+	<a href="#" class="btn btn-mod btn-border btn-circle btn-medium" onclick="effekseer.play(effects['block'], 0, 0, 0);">ブロック</a>
 	</div>
-    <div id="buttons2">
-    コントローラー：
-      <input type="button" onclick="stopAll();" value="停止"></input>
-      <input type="button" onclick="togglePause();" value="ポーズ"id="buttonPause"></input>
-	  <input type="button" onclick="toggleRotate();" value="自動回転OFF" id="buttonRotate"></input>
-      <input type="button" onclick="capture();" value="画像キャプチャー"></input>
-      ※ドラッグ・スクロール：カメラ操作
-    </div>
+	<div class="mb-10" id="buttons2">
+	<a href="#" class="btn btn-mod btn-border btn-circle btn-medium" onclick="stopAll();">停止</a>
+	<a href="#" class="btn btn-mod btn-border btn-circle btn-medium" onclick="togglePause();" id="buttonPause">ポーズ</a>
+	<a href="#" class="btn btn-mod btn-border btn-circle btn-medium" onclick="toggleRotate();" id="buttonRotate">自動回転OFF</a>
+	<a href="#" class="btn btn-mod btn-border btn-circle btn-medium" onclick="capture();">画像キャプチャー</a>
+	</div>
+	</div>
+    
     </div>
     <script type='text/javascript'>
       var effects = {};
@@ -115,13 +93,13 @@
       function togglePause () {
       	paused = !paused;
       	
-      	document.getElementById("buttonPause").value = paused? "再生":"ポーズ";
+      	document.getElementById("buttonPause").innerHTML = paused? "再生":"ポーズ";
       }
       function toggleRotate () {
         if (!controls) return;
       	controls.autoRotate = !controls.autoRotate;
       	
-      	document.getElementById("buttonRotate").value = controls.autoRotate? "自動回転ON":"自動回転OFF";
+      	document.getElementById("buttonRotate").innerHTML = controls.autoRotate? "自動回転ON":"自動回転OFF";
       }
       function capture () {
         var canvas = window.document.getElementById("canvas");
