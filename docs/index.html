@@ -1,10 +1,35 @@
 <!doctype html>
-<html lang="en-us">
+<html lang="ja">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>EffekseerForWebGL</title>
+    <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+      color: #FFF;
+    }
+    #app{
+      width: 100%;
+      height: 100%;
+      position: fixed;
+    }
+    #menu{
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin: 10px;
+    }
+    </style>
   <body>
+    <div id="app"><canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas></div>
+    
+    <div id="menu">
 	<div id="buttons">
 	エフェクト選択：
       <input type="button" onclick="effekseer.play(effects['sword'], 0, 0, 0);" value="乱れ斬りエフェクト"></input>
@@ -12,7 +37,7 @@
       <input type="button" onclick="effekseer.play(effects['Laser02'], 0, 0, 0);" value="レーザーエフェクト"></input>
       <input type="button" onclick="effekseer.play(effects['block'], 0, 0, 0);" value="ブロックエフェクト"></input>
 	</div>
-    <div id="buttons">
+    <div id="buttons2">
     コントローラー：
       <input type="button" onclick="stopAll();" value="停止"></input>
       <input type="button" onclick="togglePause();" value="ポーズ"id="buttonPause"></input>
@@ -20,16 +45,17 @@
       <input type="button" onclick="capture();" value="画像キャプチャー"></input>
       ※ドラッグ・スクロール：カメラ操作
     </div>
-    <canvas id="canvas" width="690" height="320" class="screen" oncontextmenu="event.preventDefault()"></canvas>
-    <br>
+    </div>
     <script type='text/javascript'>
       var effects = {};
       var main = function () {
+        var _app = document.getElementById("app");
         var canvas = document.getElementById("canvas");
-
-        var scene = new THREE.Scene();
         var width  = canvas.width;
         var height = canvas.height;
+
+        var scene = new THREE.Scene();
+
         var fov    = 30;
         var aspect = width / height;
         var near   = 1;
@@ -103,6 +129,14 @@
       	
       	window.open(dataUrl);
       }
+      
+	var canvas = document.getElementById('canvas');
+	var container = document.getElementById('app');
+	sizing();
+	function sizing() {
+		canvas.height = container.offsetHeight;
+		canvas.width = container.offsetWidth;
+	}
     </script>
     <script src="js/three.min.js"></script>
     <script src="js/OrbitControls.js"></script>
