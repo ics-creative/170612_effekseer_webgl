@@ -5,17 +5,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>EffekseerForWebGL</title>
   <body>
-      <div id="buttons">
+	<div id="buttons">
+	エフェクト選択：
       <input type="button" onclick="effekseer.play(effects['sword'], 0, 0, 0);" value="乱れ斬りエフェクト"></input>
       <input type="button" onclick="effekseer.play(effects['TitleEffect'], 0, 0, 0);" value="ロゴエフェクト"></input>
-      <!--<input type="button" onclick="effekseer.play(effects['distortion'], 0, 0, 0);" value="トランジションエフェクト"></input>-->
-      <input type="button" onclick="effekseer.play(effects['Laser02'], 0, 0, 0);" value="レーザー"></input>
-      <input type="button" onclick="effekseer.play(effects['block'], 0, 0, 0);" value="ブロック"></input>
+      <input type="button" onclick="effekseer.play(effects['Laser02'], 0, 0, 0);" value="レーザーエフェクト"></input>
+      <input type="button" onclick="effekseer.play(effects['block'], 0, 0, 0);" value="ブロックエフェクト"></input>
 	</div>
     <div id="buttons">
+    コントローラー：
       <input type="button" onclick="stopAll();" value="停止"></input>
-      <input type="button" onclick="togglePause();" value="ポーズ"></input>
-      <input type="button" onclick="capture();" value="画像"></input>
+      <input type="button" onclick="togglePause();" value="ポーズ"id="buttonPause"></input>
+	  <input type="button" onclick="toggleRotate();" value="自動回転OFF" id="buttonRotate"></input>
+      <input type="button" onclick="capture();" value="画像キャプチャー"></input>
+      ※ドラッグ・スクロール：カメラ操作
     </div>
     <canvas id="canvas" width="690" height="320" class="screen" oncontextmenu="event.preventDefault()"></canvas>
     <br>
@@ -36,7 +39,7 @@
         camera.position.set( 20, 20, 20 );
         camera.lookAt(target);
         
-        var controls = new THREE.OrbitControls(camera);
+        controls = new THREE.OrbitControls(camera);
         controls.autoRotate = false;
 
         var renderer = new THREE.WebGLRenderer({canvas: canvas, preserveDrawingBuffer: true});
@@ -85,6 +88,14 @@
       }
       function togglePause () {
       	paused = !paused;
+      	
+      	document.getElementById("buttonPause").value = paused? "再生":"ポーズ";
+      }
+      function toggleRotate () {
+        if (!controls) return;
+      	controls.autoRotate = !controls.autoRotate;
+      	
+      	document.getElementById("buttonRotate").value = controls.autoRotate? "自動回転ON":"自動回転OFF";
       }
       function capture () {
         var canvas = window.document.getElementById("canvas");
