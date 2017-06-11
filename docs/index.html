@@ -5,21 +5,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>EffekseerForWebGL</title>
   <body>
-    <canvas id="canvas" width="700" height="320" class="screen" oncontextmenu="event.preventDefault()"></canvas>
-    <br>
-    <div id="buttons">
+      <div id="buttons">
       <input type="button" onclick="effekseer.play(effects['sword'], 0, 0, 0);" value="乱れ斬りエフェクト"></input>
       <input type="button" onclick="effekseer.play(effects['TitleEffect'], 0, 0, 0);" value="ロゴエフェクト"></input>
-      <input type="button" onclick="effekseer.play(effects['distortion'], 0, 0, 0);" value="トランジションエフェクト"></input>
-
+      <!--<input type="button" onclick="effekseer.play(effects['distortion'], 0, 0, 0);" value="トランジションエフェクト"></input>-->
       <input type="button" onclick="effekseer.play(effects['Laser02'], 0, 0, 0);" value="レーザー"></input>
       <input type="button" onclick="effekseer.play(effects['block'], 0, 0, 0);" value="ブロック"></input>
 	</div>
     <div id="buttons">
       <input type="button" onclick="stopAll();" value="停止"></input>
       <input type="button" onclick="togglePause();" value="ポーズ"></input>
-      <input type="button" onclick="capture();" value="画像キャプチャー"></input>
+      <input type="button" onclick="capture();" value="画像"></input>
     </div>
+    <canvas id="canvas" width="690" height="320" class="screen" oncontextmenu="event.preventDefault()"></canvas>
     <br>
     <script type='text/javascript'>
       var effects = {};
