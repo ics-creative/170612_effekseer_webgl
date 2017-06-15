@@ -46,7 +46,7 @@
         var far    = 1000;
         var camera = new THREE.PerspectiveCamera( fov, aspect, near, far );
         var target = new THREE.Vector3(0, 0, 0);
-        camera.position.set( 20, 20, 20 );
+        camera.position.set( 0, 2, 40 );
         camera.lookAt(target);
         
         controls = new THREE.OrbitControls(camera);
@@ -66,14 +66,9 @@
         var grid = new THREE.GridHelper(20, 10, 0xffffff, 0xffffff);
         //scene.add(grid);
 
-        var directionalLight = new THREE.DirectionalLight( 0xffffff );
-        directionalLight.position.set( 0, 0.7, 0.7 );
-        scene.add( directionalLight );
-
-        var geometry = new THREE.CubeGeometry( 2, 2, 2 );
-        var material = new THREE.MeshPhongMaterial( { color: 0xff0000 } );
-        var mesh = new THREE.Mesh( geometry, material );
-        //scene.add( mesh );
+        //var directionalLight = new THREE.DirectionalLight( 0xffffff );
+        //directionalLight.position.set( 0, 0.7, 0.7 );
+        //scene.add( directionalLight );
         
         ( function renderLoop () {
           requestAnimationFrame( renderLoop );
