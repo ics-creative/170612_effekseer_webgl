@@ -15,7 +15,7 @@ html, body {
 #menu{
   position: absolute;
   left: 0;
-  top: 0;
+  bottom: 0;
   margin-left: 10px;
 }
 
