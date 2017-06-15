@@ -16,10 +16,17 @@ html, body {
   position: absolute;
   left: 0;
   top: 0;
-  margin: 10px;
+  margin-left: 10px;
 }
 
+ul {
+    padding:0px;
+}
+li {
+	display: inline-block;
+}
 .mb-10{
+	line-height:40px;
     margin-bottom:20px;
 }
  
