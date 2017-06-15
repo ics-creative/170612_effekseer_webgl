@@ -40,7 +40,7 @@ var grid = new THREE.GridHelper(20, 10, 0xffffff, 0xffffff);
 //scene.add( directionalLight );
 
 ( function renderLoop () {
-  // SP‚Í30FPS‚É‚·‚é
+  // SPæ™‚ã¯30FPSã«ã™ã‚‹
   if (isSp && ++counter%2==0){
     if (!paused) {
   	  effekseer.update();
@@ -70,12 +70,12 @@ function stopAll() {
 }
 function togglePause () {
 	paused = !paused;
-	document.getElementById("buttonPause").innerHTML = paused? "Ä¶":"ƒ|[ƒY";
+	document.getElementById("buttonPause").innerHTML = paused? "å†ç”Ÿ":"ãƒãƒ¼ã‚º";
 }
 function toggleRotate () {
 	if (!controls) return;
 	controls.autoRotate = !controls.autoRotate;
-	document.getElementById("buttonRotate").innerHTML = controls.autoRotate? "©“®‰ñ“]ON":"©“®‰ñ“]OFF";
+	document.getElementById("buttonRotate").innerHTML = controls.autoRotate? "å›è»¢ON":"å›è»¢OFF";
 }
 function capture () {
 	var canvas = window.document.getElementById("canvas");
