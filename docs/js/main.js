@@ -64,8 +64,20 @@ var grid = new THREE.GridHelper(20, 10, 0xffffff, 0xffffff);
 };
 window.addEventListener( 'DOMContentLoaded', main, false );
 var paused = false;
+function playEffect(effect) {
+	if (!effekseer || !effects[effect])
+	{
+		return
+	}
+	stopAll();
+	effekseer.play(effects[effect], 0, 0, 0);
+}
 function stopAll() {
 	paused = false;
+	if (!effekseer)
+	{
+		return;
+	}
 	effekseer.stopAll();
 }
 function togglePause () {
